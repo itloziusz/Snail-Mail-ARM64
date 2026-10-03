@@ -1,6 +1,6 @@
 param(
-    [string]$Version = '0.1.6',
-    [int]$VersionCode = 10,
+    [string]$Version = '0.1.7',
+    [int]$VersionCode = 11,
     [string]$AppId = 'com.sandlotgames.snailmail.port.release'
 )
 $ErrorActionPreference = 'Stop'
@@ -37,7 +37,7 @@ Check-Exit
 $manifest = [IO.File]::ReadAllText((Join-Path $root 'android/app/src/main/AndroidManifest.xml'))
 $manifest = $manifest.Replace('<manifest xmlns:android="http://schemas.android.com/apk/res/android"', ('<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.sandlotgames.snailmail" android:versionCode="' + $code + '" android:versionName="' + $version + '"'))
 $manifest = $manifest.Replace('android:glEsVersion="0x00010001"','android:glEsVersion="0x00020000"')
-$manifest = $manifest.Replace('android:label="@string/app_name"','android:label="Snail Mail ARM64"')
+$manifest = $manifest.Replace('android:label="@string/app_name"','android:label="Snail Mail"')
 [IO.File]::WriteAllText((Join-Path $out 'AndroidManifest.xml'), $manifest)
 & "$bt/aapt.exe" package -f --min-sdk-version 23 --target-sdk-version 35 --rename-manifest-package $AppId -M (Join-Path $out 'AndroidManifest.xml') -S work/android_build/app/res -S android/app/src/main/res -A work/apk_unzip/assets -A android/app/src/main/assets -I $jar -0 arsc -0 mp3 -0 ogg -F (Join-Path $out 'unsigned.apk')
 Check-Exit

@@ -41,3 +41,5 @@ The supplemental widescreen art and masks are included in the repository.
 The private local signing key must be retained for updates and never committed.
 Version 0.1.6 retains the release application ID and key, has version code 10,
 and passes signature, ARM64 ELF and 16 KiB package alignment checks.
+
+Version 0.1.7 (code 11) changes both application and launcher labels to **Snail Mail**. Package ID and signing key are unchanged, so it updates v0.1.6 without removing saves.
